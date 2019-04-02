@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <title>Top Internet Countries Visualization</title>
+    <style>
+      body {
+        margin: 0px;
+      }
+      .domain {
+        display: none;
+      }
+      .tick line {
+        stroke: #C0C0BB;
+      }
+      .tick text {
+        fill: #8E8883;
+        font-size: 14pt;
+        font-family: sans-serif;
+      }
+      .axis-label {
+        fill: #635F5D;
+        font-size: 32pt;
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="960" height="500"></svg>
+    <script>
+	/*
+      const xValue = d => d.netUsers;
+      const xLabel = 'Internet Users';
+      const yValue = d => d.country;
+      const yLabel = 'Country';
+      const margin = { left: 150, right: 30, top: 5, bottom: 75 };
+
+      const svg = d3.select('svg');
+      const width = svg.attr('width');
+      const height = svg.attr('height');
+      const innerWidth = width - margin.left - margin.right;
+      const innerHeight = height - margin.top - margin.bottom;
+
+      const g = svg.append('g')
+          .attr('transform', `translate(${margin.left},${margin.top})`);
+      const xAxisG = g.append('g')
+          .attr('transform', `translate(0, ${innerHeight})`);
+      const yAxisG = g.append('g');
+
+      xAxisG.append('text')
+          .attr('class', 'axis-label')
+          .attr('x', innerWidth / 2)
+          .attr('y', 55)
+          .text(xLabel);
+
+      const xScale = d3.scaleLinear();
+      const yScale = d3.scaleBand()
+        .paddingInner(0.3)
+        .paddingOuter(0);
+
+      const xTicks = 10;
+      const xAxis = d3.axisBottom()
+        .scale(xScale)
+        .ticks(xTicks)
+        .tickPadding(5)
+        .tickFormat(d3.format('.0s'))
+        .tickSize(-innerHeight);
+
+      const yAxis = d3.axisLeft()
+        .scale(yScale)
+        .tickPadding(5)
+        .tickSize(-innerWidth);
+
+      const row = d => {
+        const netUsersWithCommas = d['Internet Users 31 Mar 2017'];
+        return {
+          Borough: d['BOROUGH'],
+          netUsers: +netUsersWithCommas.replace(/,/g, '')
+        };
+      };
+	
+      d3.csv('NYPD_Motor_Vehicle_Collisions.csv', row, data => {
+        yScale
+          .domain(data.map(yValue).reverse())
+          .range([innerHeight, 0]);
+
+        xScale
+          .domain([0, d3.max(data, xValue)])
+          .range([0, innerWidth])
+          .nice(xTicks);
+
+        g.selectAll('rect').data(data)
+          .enter().append('rect')
+            .attr('x', 0)
+            .attr('y', d => yScale(yValue(d)))
+            .attr('width', d => xScale(xValue(d)))
+            .attr('height', d => yScale.bandwidth())
+            .attr('fill', 'steelblue');
+
+        xAxisG.call(xAxis);
+
+        yAxisG.call(yAxis);
+        yAxisG.selectAll('.tick line').remove();
+      });*/
+	  d3.parse("NYPD_Motor_Vehicle_Collisions.csv", function(data){ temp = data; });
+
+	  var temp='DATE,TIME,BOROUGH,ZIP CODE,LATITUDE,LONGITUDE,LOCATION,ON STREET NAME,CROSS STREET NAME,OFF STREET NAME,NUMBER OF PERSONS INJURED,NUMBER OF PERSONS KILLED,NUMBER OF PEDESTRIANS INJURED,NUMBER OF PEDESTRIANS KILLED,NUMBER OF CYCLIST INJURED,NUMBER OF CYCLIST KILLED,NUMBER OF MOTORIST INJURED,NUMBER OF MOTORIST KILLED,CONTRIBUTING FACTOR VEHICLE 1,CONTRIBUTING FACTOR VEHICLE 2,CONTRIBUTING FACTOR VEHICLE 3,CONTRIBUTING FACTOR VEHICLE 4,CONTRIBUTING FACTOR VEHICLE 5,UNIQUE KEY,VEHICLE TYPE CODE 1,VEHICLE TYPE CODE 2,VEHICLE TYPE CODE 3,VEHICLE TYPE CODE 4,VEHICLE TYPE CODE 5\
+03/25/2019,0:00,BRONX,10454,40.80627,-73.926155,"(40.80627, -73.926155)",,,70        BRUCKNER BOULEVARD            ,0,0,0,0,0,0,0,0,Aggressive Driving/Road Rage,Unspecified,,,,4103205,Van,Station Wagon/Sport Utility Vehicle,,,\
+03/25/2019,0:00,BROOKLYN,11201,40.69051,-73.99268,"(40.69051, -73.99268)",,,190       STATE STREET                  ,0,0,0,0,0,0,0,0,Driver Inattention/Distraction,Unspecified,,,,4103242,Sedan,Station Wagon/Sport Utility Vehicle,,,\
+03/25/2019,0:00,BROOKLYN,11208,40.689583,-73.87158,"(40.689583, -73.87158)",,,18        AUTUMN AVENUE                 ,0,0,0,0,0,0,0,0,Driver Inattention/Distraction,Unspecified,,,,4103450,Bus,Pick-up Truck,,,\
+03/25/2019,0:00,BROOKLYN,11223,40.606953,-73.970116,"(40.606953, -73.970116)",,,425       QUENTIN ROAD                  ,0,0,0,0,0,0,0,0,Driver Inattention/Distraction,Unspecified,,,,4102948,Station Wagon/Sport Utility Vehicle,Station Wagon/Sport Utility Vehicle,,,\
+03/25/2019,0:00,,,40.608105,-73.75414,"(40.608105, -73.75414)",BEACH CHANNEL DRIVE             ,,,0,0,0,0,0,0,0,0,Driver Inattention/Distraction,Unspecified,,,,4103790,Sedan,Sedan,,,\
+03/25/2019,0:00,,,,,,VERRAZANO BRIDGE                ,,,0,0,0,0,0,0,0,0,Following Too Closely,Unspecified,,,,4103478,Station Wagon/Sport Utility Vehicle,Sedan,,,\
+03/25/2019,0:00,BROOKLYN,11238,40.680645,-73.97019,"(40.680645, -73.97019)",,,594       DEAN STREET                   ,1,0,0,0,0,0,1,0,Failure to Yield Right-of-Way,Unspecified,,,,4103234,Motorcycle,Station Wagon/Sport Utility Vehicle,,,\
+03/25/2019,0:00,,,,,,BRONX WHITESTONE BRIDGE         ,,,1,0,0,0,0,0,1,0,Reaction to Uninvolved Vehicle,Unspecified,,,,4103179,Station Wagon/Sport Utility Vehicle,Sedan,,,\
+03/25/2019,0:00,QUEENS,11411,40.692383,-73.73145,"(40.692383, -73.73145)",LINDEN BOULEVARD                ,230 STREET,,2,0,0,0,0,0,2,0,Driver Inattention/Distraction,Unspecified,,,,4103775,Station Wagon/Sport Utility Vehicle,Sedan,,,\
+03/25/2019,0:00,BRONX,10451,40.82463,-73.91059,"(40.82463, -73.91059)",EAST 163 STREET                 ,WASHINGTON AVENUE,,6,0,0,0,0,0,6,0,Traffic Control Disregarded,Unspecified,Unspecified,,,4103223,Sedan,Sedan,Sedan,,'
+	  var t = d3.csv.parse(temp);
+	d3.select("#output").html(t.map(function(d){return d['BOROUGH'];}));
+    </script>
+  </body>
+</html>
