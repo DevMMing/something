@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>D3 DataBinding</title>
+</head>
+<body>
+	<h1>Simple Barchart d3v5</h1>
+	
+	<svg width=200 
+		 height=200
+		 id="viz">
+	</svg>
+
+  
+  <svg width=200 
+		 height=200
+		 id="viz2">
+	</svg>
+  
+  
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script>
+		
+    
+		
+    function doScatterPlot(myData, svg) {
+      margin = {top: 20, right: 20, bottom: 30, left: 50},
+      width = +svg.attr("width") - margin.left - margin.right,
+      height = +svg.attr("height") - margin.top - margin.bottom; // You were missing a ; here
+
+    const x = d3.scaleLinear()
+        .domain([0, d3.max(myData, d=> d.Accidents)])
+        .range([0, width]);
+
+    const rects = svg.selectAll(".bar")
+      .data(myData.sort( (a,b) => d3.descending(a.Accidents, b.Accidents)) ); 
+
+    rects.enter()
+      .append("rect")
+        .attr("class", "bar")
+        .attr("x", 0)
+        .attr("y", (d,i, ds) => i*10)
+        .attr("width", d => x(d.Accidents))
+        .attr("height", 9)
+        .style("fill", "steelblue");
+
+      
+    const texts = svg.selectAll(".label")
+    .data(myData);
+  
+    
+  
+    rects.enter()
+      .append("text")
+        .attr("class", "label")
+        .attr("x", 0)
+        .attr("y", (d,i, ds) => i*10)
+    
+       // .attr("x", d => x(d.censo))
+        //.attr("y", (d) => y(d.municipio))
+        .text( d=> d.Boroughs)
+        // .attr("width", d => x(d.censo))
+        // .attr("height", 9)
+        .style("fill", "#333")
+        .style("font-size", "6pt")
+        .style("font-family", "sans-serif");  
+      
+
+      console.log("w", width, "h", height);      
+      
+    }
+    
+    
+    
+    
+
+    
+    // Returns a promise, you don't get the data straight from it
+		d3.csv("save.csv")
+      .then( data => {
+	    doScatterPlot(data, d3.select("#viz"));
+	 //   doScatterPlot(data, d3.select("#viz2"));      
+    });
+    
+    
+    
+
+
+	</script>
+</body>
+</html>
