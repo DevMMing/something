@@ -1,0 +1,6 @@
+Bronx 141268
+Manhattan 251216
+Brooklyn 318263
+Queens 271905
+StatenIsland 46489
+Unknown <_io.TextIOWrapper name='save.txt' mode='w' encoding='cp1252'>
